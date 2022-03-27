@@ -21,7 +21,15 @@ def pregunta_01():
     214
 
     """
-    suma = 214
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df] #Separamos
+    Col2 = [z[1] for z in df[0:]] #Capturamos la columna 2
+
+    suma = 0
+    for i in Col2:
+        suma = suma + int(i)
+
     return suma
 
 
@@ -40,7 +48,20 @@ def pregunta_02():
     ]
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df] #Separamos
+    
+    Col1 = [z[0] for z in df[0:]]
+
+    from collections import Counter
+    from operator import itemgetter
+
+    tuples_list = Counter(Col1)
+    tuples_list = dict(tuples_list)
+    ordenada = sorted(tuples_list.items())
+
+    return ordenada
 
 
 def pregunta_03():

@@ -151,7 +151,7 @@ def pregunta_04():
     tuples_list = Counter(Col3_mes)
     tuples_list = dict(tuples_list)
     ordenada = sorted(tuples_list.items())
-    
+
     return ordenada
 
 
@@ -170,7 +170,52 @@ def pregunta_05():
     ]
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df]
+
+    Col1 = [z[0] for z in df[0:]]#Se extrae la columna 1
+
+    ListA = [z for z in df if z[0] == "A"]
+    ListB = [z for z in df if z[0] == "B"]
+    ListC = [z for z in df if z[0] == "C"]
+    ListD = [z for z in df if z[0] == "D"]
+    ListE = [z for z in df if z[0] == "E"]
+
+    ListA_ = [z[1] for z in ListA] #Se extrae la columna 2 del segmento que le pertenece a A
+    ListB_ = [z[1] for z in ListB]
+    ListC_ = [z[1] for z in ListC]
+    ListD_ = [z[1] for z in ListD]
+    ListE_ = [z[1] for z in ListE]
+
+    lista_p5 = []
+
+    for i in Col1:
+        if i == 'A':
+            minimo = min(ListA_)
+            maximo = max(ListA_)
+        elif i == 'B':
+            minimo = min(ListB_)
+            maximo = max(ListB_)
+        elif i == 'C':
+            minimo = min(ListC_)
+            maximo = max(ListC_)
+        elif i == 'D':
+            minimo = min(ListD_)
+            maximo = max(ListD_)
+        else:
+            minimo = min(ListE_)
+            maximo = max(ListE_)
+        
+        tupla = (i, int(maximo), int(minimo))
+        
+        lista_p5.append(tupla)
+        
+    unique_list = list(set(lista_p5))
+    unique_list.sort(key = lambda x: x[0], reverse=False)
+    tuple(unique_list)
+
+    return unique_list
 
 
 def pregunta_06():

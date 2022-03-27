@@ -264,7 +264,60 @@ def pregunta_07():
     ]
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df] #Separamos
+    Col2 = [z[1] for z in df[0:]] #Capturamos la columna 2
+
+    List0 = [z for z in df if z[1] == '0']
+    List1 = [z for z in df if z[1] == "1"]
+    List2 = [z for z in df if z[1] == "2"]
+    List3 = [z for z in df if z[1] == "3"]
+    List4 = [z for z in df if z[1] == "4"]
+    List5 = [z for z in df if z[1] == "5"]
+    List6 = [z for z in df if z[1] == "6"]
+    List7 = [z for z in df if z[1] == "7"]
+    List8 = [z for z in df if z[1] == "8"]
+    List9 = [z for z in df if z[1] == "9"]
+
+    Col1_X = []
+    lista_final = []
+
+    for i in Col2:
+        if i == '0':
+            Col1_X = [z[0] for z in List0[0:]]
+        elif i == '1':
+            Col1_X = [z[0] for z in List1[0:]]
+        elif i == '2':
+            Col1_X = [z[0] for z in List2[0:]]
+        elif i == '3':
+            Col1_X = [z[0] for z in List3[0:]]
+        elif i == '4':
+            Col1_X = [z[0] for z in List4[0:]]
+        elif i == '5':
+            Col1_X = [z[0] for z in List5[0:]]
+        elif i == '6':
+            Col1_X = [z[0] for z in List6[0:]]
+        elif i == '7':
+            Col1_X = [z[0] for z in List7[0:]]
+        elif i == '8':
+            Col1_X = [z[0] for z in List8[0:]]
+        else:
+            Col1_X = [z[0] for z in List9[0:]]
+
+        lista_veces = (int(i), Col1_X)
+        lista_final.append(lista_veces)
+        
+        
+    lista_final.sort(key = lambda x: x[0], reverse=False)
+
+    unique_list = [] 
+
+    for x in lista_final: 
+        if x not in unique_list:
+            unique_list.append(x)
+
+    return unique_list 
 
 
 def pregunta_08():

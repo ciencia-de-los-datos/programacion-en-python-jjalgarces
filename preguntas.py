@@ -51,11 +51,10 @@ def pregunta_02():
     df = open("data.csv", "r").readlines() #Se hace lectura de la data
     df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
     df = [z.split("\t") for z in df] #Separamos
-    
+
     Col1 = [z[0] for z in df[0:]]
 
     from collections import Counter
-    from operator import itemgetter
 
     tuples_list = Counter(Col1)
     tuples_list = dict(tuples_list)
@@ -79,7 +78,46 @@ def pregunta_03():
     ]
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df]
+
+    ListA = [z for z in df if z[0] == "A"]
+    ListB = [z for z in df if z[0] == "B"]
+    ListC = [z for z in df if z[0] == "C"]
+    ListD = [z for z in df if z[0] == "D"]
+    ListE = [z for z in df if z[0] == "E"]
+
+    Col2A = [z[1] for z in ListA[0:]]
+    Col2B = [z[1] for z in ListB[0:]]
+    Col2C = [z[1] for z in ListC[0:]]
+    Col2D = [z[1] for z in ListD[0:]]
+    Col2E = [z[1] for z in ListE[0:]]
+
+    sumaA = 0
+    sumaB = 0
+    sumaC = 0
+    sumaD = 0
+    sumaE = 0
+
+    for i in Col2A:
+        sumaA = sumaA + int(i)
+        
+    for i in Col2B:
+        sumaB = sumaB + int(i)
+
+    for i in Col2C:
+        sumaC = sumaC + int(i)
+
+    for i in Col2D:
+        sumaD = sumaD + int(i)
+        
+    for i in Col2E:
+        sumaE = sumaE + int(i)
+
+    List_ordenada = [('A', sumaA), ('B', sumaB), ('C', sumaC), ('D', sumaD), ('E', sumaE)]
+
+    return List_ordenada
 
 
 def pregunta_04():
@@ -104,7 +142,17 @@ def pregunta_04():
     ]
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df] #Separamos
+    Col3_mes = [z[2].split("-")[1] for z in df[0:]]
+    from collections import Counter
+
+    tuples_list = Counter(Col3_mes)
+    tuples_list = dict(tuples_list)
+    ordenada = sorted(tuples_list.items())
+    
+    return ordenada
 
 
 def pregunta_05():

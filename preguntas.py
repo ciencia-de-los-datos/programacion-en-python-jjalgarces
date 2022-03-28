@@ -382,10 +382,6 @@ def pregunta_09():
             values = (x[4:])
             list_values.append(values)
             list_keys.append(keys)
-    # print(list_keys)
-    # print(list_values)
-
-    # len(list_keys)
 
     from collections import Counter
 

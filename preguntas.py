@@ -365,7 +365,35 @@ def pregunta_09():
     }
 
     """
-    return
+
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df]
+
+    Col5 = [z[4] for z in df[0:]]
+    Col5_split = [z.split(",") for z in Col5]
+
+    list_values = []
+    list_keys = []
+
+    for i in Col5_split:
+        for x in i:
+            keys = (x[0:3])
+            values = (x[4:])
+            list_values.append(values)
+            list_keys.append(keys)
+    # print(list_keys)
+    # print(list_values)
+
+    # len(list_keys)
+
+    from collections import Counter
+
+    tuples_list = Counter(list_keys) #Tipo de dato Counter
+    tuples_list = dict(sorted(tuples_list.items())) #Se convierte en diccionario
+    
+
+    return tuples_list
 
 
 def pregunta_10():

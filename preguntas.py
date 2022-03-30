@@ -410,7 +410,20 @@ def pregunta_10():
 
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df]
+
+    lista_p10 = []
+
+    for i in df:
+        Columna1 = i[0]
+        Columna4 = i[3].split(",")
+        Columna5 = i[4].split(",")
+        tupla = (Columna1, len(Columna4), len(Columna5))
+        lista_p10.append(tupla)
+
+    return lista_p10
 
 
 def pregunta_11():

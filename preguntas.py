@@ -21,7 +21,16 @@ def pregunta_01():
     214
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df] #Separamos
+    Col2 = [z[1] for z in df[0:]] #Capturamos la columna 2
+
+    suma = 0
+    for i in Col2:
+        suma = suma + int(i)
+
+    return suma
 
 
 def pregunta_02():
@@ -39,7 +48,19 @@ def pregunta_02():
     ]
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df] #Separamos
+
+    Col1 = [z[0] for z in df[0:]]
+
+    from collections import Counter
+
+    tuples_list = Counter(Col1)
+    tuples_list = dict(tuples_list)
+    ordenada = sorted(tuples_list.items())
+
+    return ordenada
 
 
 def pregunta_03():
@@ -57,7 +78,46 @@ def pregunta_03():
     ]
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df]
+
+    ListA = [z for z in df if z[0] == "A"]
+    ListB = [z for z in df if z[0] == "B"]
+    ListC = [z for z in df if z[0] == "C"]
+    ListD = [z for z in df if z[0] == "D"]
+    ListE = [z for z in df if z[0] == "E"]
+
+    Col2A = [z[1] for z in ListA[0:]]
+    Col2B = [z[1] for z in ListB[0:]]
+    Col2C = [z[1] for z in ListC[0:]]
+    Col2D = [z[1] for z in ListD[0:]]
+    Col2E = [z[1] for z in ListE[0:]]
+
+    sumaA = 0
+    sumaB = 0
+    sumaC = 0
+    sumaD = 0
+    sumaE = 0
+
+    for i in Col2A:
+        sumaA = sumaA + int(i)
+        
+    for i in Col2B:
+        sumaB = sumaB + int(i)
+
+    for i in Col2C:
+        sumaC = sumaC + int(i)
+
+    for i in Col2D:
+        sumaD = sumaD + int(i)
+        
+    for i in Col2E:
+        sumaE = sumaE + int(i)
+
+    List_ordenada = [('A', sumaA), ('B', sumaB), ('C', sumaC), ('D', sumaD), ('E', sumaE)]
+
+    return List_ordenada
 
 
 def pregunta_04():
@@ -82,7 +142,17 @@ def pregunta_04():
     ]
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df] #Separamos
+    Col3_mes = [z[2].split("-")[1] for z in df[0:]]
+    from collections import Counter
+
+    tuples_list = Counter(Col3_mes)
+    tuples_list = dict(tuples_list)
+    ordenada = sorted(tuples_list.items())
+
+    return ordenada
 
 
 def pregunta_05():
@@ -100,7 +170,52 @@ def pregunta_05():
     ]
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df]
+
+    Col1 = [z[0] for z in df[0:]]#Se extrae la columna 1
+
+    ListA = [z for z in df if z[0] == "A"]
+    ListB = [z for z in df if z[0] == "B"]
+    ListC = [z for z in df if z[0] == "C"]
+    ListD = [z for z in df if z[0] == "D"]
+    ListE = [z for z in df if z[0] == "E"]
+
+    ListA_ = [z[1] for z in ListA] #Se extrae la columna 2 del segmento que le pertenece a A
+    ListB_ = [z[1] for z in ListB]
+    ListC_ = [z[1] for z in ListC]
+    ListD_ = [z[1] for z in ListD]
+    ListE_ = [z[1] for z in ListE]
+
+    lista_p5 = []
+
+    for i in Col1:
+        if i == 'A':
+            minimo = min(ListA_)
+            maximo = max(ListA_)
+        elif i == 'B':
+            minimo = min(ListB_)
+            maximo = max(ListB_)
+        elif i == 'C':
+            minimo = min(ListC_)
+            maximo = max(ListC_)
+        elif i == 'D':
+            minimo = min(ListD_)
+            maximo = max(ListD_)
+        else:
+            minimo = min(ListE_)
+            maximo = max(ListE_)
+        
+        tupla = (i, int(maximo), int(minimo))
+        
+        lista_p5.append(tupla)
+        
+    unique_list = list(set(lista_p5))
+    unique_list.sort(key = lambda x: x[0], reverse=False)
+    tuple(unique_list)
+
+    return unique_list
 
 
 def pregunta_06():
@@ -125,7 +240,31 @@ def pregunta_06():
     ]
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df]
+    Col5 = [z[4] for z in df[0:]]
+    
+    Col5_split = [z.split(",") for z in Col5]
+
+    list_6 = []
+
+    for i in Col5_split:
+        for x in i:    
+            tupla = ((x[0:3]), (x[4:]))
+            list_6.append(tupla)
+
+    result = {}
+    for letra, valor in list_6:
+        valor = int(valor)
+        if letra in result.keys():
+            result[letra].append(valor)
+        else:
+            result[letra] = [valor]       
+    result = [(key, min(valor), max(valor)) for key, valor in result.items()]
+    result = sorted(result)
+
+    return result
 
 
 def pregunta_07():
@@ -149,7 +288,60 @@ def pregunta_07():
     ]
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df] #Separamos
+    Col2 = [z[1] for z in df[0:]] #Capturamos la columna 2
+
+    List0 = [z for z in df if z[1] == '0']
+    List1 = [z for z in df if z[1] == "1"]
+    List2 = [z for z in df if z[1] == "2"]
+    List3 = [z for z in df if z[1] == "3"]
+    List4 = [z for z in df if z[1] == "4"]
+    List5 = [z for z in df if z[1] == "5"]
+    List6 = [z for z in df if z[1] == "6"]
+    List7 = [z for z in df if z[1] == "7"]
+    List8 = [z for z in df if z[1] == "8"]
+    List9 = [z for z in df if z[1] == "9"]
+
+    Col1_X = []
+    lista_final = []
+
+    for i in Col2:
+        if i == '0':
+            Col1_X = [z[0] for z in List0[0:]]
+        elif i == '1':
+            Col1_X = [z[0] for z in List1[0:]]
+        elif i == '2':
+            Col1_X = [z[0] for z in List2[0:]]
+        elif i == '3':
+            Col1_X = [z[0] for z in List3[0:]]
+        elif i == '4':
+            Col1_X = [z[0] for z in List4[0:]]
+        elif i == '5':
+            Col1_X = [z[0] for z in List5[0:]]
+        elif i == '6':
+            Col1_X = [z[0] for z in List6[0:]]
+        elif i == '7':
+            Col1_X = [z[0] for z in List7[0:]]
+        elif i == '8':
+            Col1_X = [z[0] for z in List8[0:]]
+        else:
+            Col1_X = [z[0] for z in List9[0:]]
+
+        lista_veces = (int(i), Col1_X)
+        lista_final.append(lista_veces)
+        
+        
+    lista_final.sort(key = lambda x: x[0], reverse=False)
+
+    unique_list = [] 
+
+    for x in lista_final: 
+        if x not in unique_list:
+            unique_list.append(x)
+
+    return unique_list 
 
 
 def pregunta_08():
@@ -174,7 +366,67 @@ def pregunta_08():
     ]
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df] #Separamos
+    Col2 = [z[1] for z in df[0:]] #Capturamos la columna 2
+
+    List0 = [z for z in df if z[1] == '0']
+    List1 = [z for z in df if z[1] == "1"]
+    List2 = [z for z in df if z[1] == "2"]
+    List3 = [z for z in df if z[1] == "3"]
+    List4 = [z for z in df if z[1] == "4"]
+    List5 = [z for z in df if z[1] == "5"]
+    List6 = [z for z in df if z[1] == "6"]
+    List7 = [z for z in df if z[1] == "7"]
+    List8 = [z for z in df if z[1] == "8"]
+    List9 = [z for z in df if z[1] == "9"]
+
+    Col1_X = []
+    lista_final = []
+
+    for i in Col2:
+        if i == '0':
+            Col1_X = [z[0] for z in List0[0:]]
+        elif i == '1':
+            Col1_X = [z[0] for z in List1[0:]]
+        elif i == '2':
+            Col1_X = [z[0] for z in List2[0:]]
+        elif i == '3':
+            Col1_X = [z[0] for z in List3[0:]]
+        elif i == '4':
+            Col1_X = [z[0] for z in List4[0:]]
+        elif i == '5':
+            Col1_X = [z[0] for z in List5[0:]]
+        elif i == '6':
+            Col1_X = [z[0] for z in List6[0:]]
+        elif i == '7':
+            Col1_X = [z[0] for z in List7[0:]]
+        elif i == '8':
+            Col1_X = [z[0] for z in List8[0:]]
+        else:
+            Col1_X = [z[0] for z in List9[0:]]
+
+        lista_veces = (int(i), Col1_X)
+        lista_final.append(lista_veces)
+        
+        
+    lista_final.sort(key = lambda x: x[0], reverse=False)
+
+    unique_list = [] 
+
+    for x in lista_final: 
+        if x not in unique_list:
+            unique_list.append(x)
+
+    letrasU = []
+    for i in unique_list:
+        letras = set(i[1])
+        ordenada = sorted(letras)
+        tupla = (i[0], list(ordenada))
+        letrasU.append(tupla)
+
+    return letrasU
 
 
 def pregunta_09():
@@ -197,7 +449,31 @@ def pregunta_09():
     }
 
     """
-    return
+
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df]
+
+    Col5 = [z[4] for z in df[0:]]
+    Col5_split = [z.split(",") for z in Col5]
+
+    list_values = []
+    list_keys = []
+
+    for i in Col5_split:
+        for x in i:
+            keys = (x[0:3])
+            values = (x[4:])
+            list_values.append(values)
+            list_keys.append(keys)
+
+    from collections import Counter
+
+    tuples_list = Counter(list_keys) #Tipo de dato Counter
+    tuples_list = dict(sorted(tuples_list.items())) #Se convierte en diccionario
+    
+
+    return tuples_list
 
 
 def pregunta_10():
@@ -218,7 +494,20 @@ def pregunta_10():
 
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df]
+
+    lista_p10 = []
+
+    for i in df:
+        Columna1 = i[0]
+        Columna4 = i[3].split(",")
+        Columna5 = i[4].split(",")
+        tupla = (Columna1, len(Columna4), len(Columna5))
+        lista_p10.append(tupla)
+
+    return lista_p10
 
 
 def pregunta_11():
@@ -239,7 +528,98 @@ def pregunta_11():
 
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df] #Separamos
+
+    list_11 = []
+
+    Cols = [row[1:4:2] for row in df[0:]]
+    for i in Cols:
+        Columna4 = i[1].split(",")
+        for x in Columna4:
+            tupla = (i[0],x)
+            list_11.append(tupla) 
+
+    valA = []
+    letA = []
+    valB = []
+    letB = []
+    valC = []
+    letC = []
+    valD = []
+    letD = []
+    valE = []
+    letE = []
+    valF = []
+    letF = []
+    valG = []
+    letG = []
+
+    for j in list_11:
+        if j[1] == 'a':
+            valA.append(j[0])
+            letA.append(j[1])
+        elif j[1] == 'b':
+            valB.append(j[0])
+            letB.append(j[1])
+        elif j[1] == 'c':
+            valC.append(j[0])
+            letC.append(j[1])
+        elif j[1] == 'd':
+            valD.append(j[0])
+            letD.append(j[1])
+        elif j[1] == 'e':
+            valE.append(j[0])
+            letE.append(j[1])
+        elif j[1] == 'f':
+            valF.append(j[0])
+            letF.append(j[1])
+        else:
+            valG.append(j[0])
+            letG.append(j[1])
+
+    sumaA = 0
+    for i in valA:
+        sumaA = sumaA + int(i)
+
+    sumaB = 0
+    for i in valB:
+        sumaB = sumaB + int(i)
+
+    sumaC = 0
+    for i in valC:
+        sumaC = sumaC + int(i)
+
+    sumaD = 0
+    for i in valD:
+        sumaD = sumaD + int(i)
+
+    sumaE = 0
+    for i in valE:
+        sumaE = sumaE + int(i)
+
+    sumaF = 0
+    for i in valF:
+        sumaF = sumaF + int(i)
+
+    sumaG = 0
+    for i in valG:
+        sumaG = sumaG + int(i)
+
+    List_ordenada = [(letA[1], sumaA), (letB[1], sumaB), (letC[1], sumaC), (letD[1], sumaD), (letE[1], sumaE), (letF[1], sumaF), 
+                    (letG[1], sumaG)]
+
+    result = {}
+    for letra, suma in List_ordenada:
+        if letra in result.keys():
+            result[letra].append(suma)
+        else:
+            result[letra] = suma
+
+
+
+    return result
 
 
 def pregunta_12():
@@ -257,4 +637,35 @@ def pregunta_12():
     }
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df] #Separamos
+
+    Cols = [row[0:5:4] for row in df[0:]]
+
+    list_12 = []
+    list_12_2 = []
+    for i in Cols:
+        Columna5 = i[1].split(",")
+        tupla = (i[0],Columna5)
+        list_12.append(tupla)
+    list_12
+
+    for x in list_12:
+        for z in x[1]:
+            tupla12 = (x[0], z[4:])
+            list_12_2.append(tupla12) 
+
+    result = {}
+    for letra, valor in list_12_2:
+        valor = int(valor)
+    #     print(valor)
+        if letra in result.keys():
+            result[letra].append(valor)
+        else:
+            result[letra] = [valor]
+            
+    result = [(key, sum(valor)) for key, valor in result.items()]
+    result = sorted(result)
+    result = dict(result)
+    return result

@@ -240,7 +240,31 @@ def pregunta_06():
     ]
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df]
+    Col5 = [z[4] for z in df[0:]]
+    
+    Col5_split = [z.split(",") for z in Col5]
+
+    list_6 = []
+
+    for i in Col5_split:
+        for x in i:    
+            tupla = ((x[0:3]), (x[4:]))
+            list_6.append(tupla)
+
+    result = {}
+    for letra, valor in list_6:
+        valor = int(valor)
+        if letra in result.keys():
+            result[letra].append(valor)
+        else:
+            result[letra] = [valor]       
+    result = [(key, min(valor), max(valor)) for key, valor in result.items()]
+    result = sorted(result)
+
+    return result
 
 
 def pregunta_07():

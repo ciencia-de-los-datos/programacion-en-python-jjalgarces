@@ -553,4 +553,35 @@ def pregunta_12():
     }
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df] #Separamos
+    
+    Cols = [row[0:5:4] for row in df[0:]]
+
+    list_12 = []
+    list_12_2 = []
+    for i in Cols:
+        Columna5 = i[1].split(",")
+        tupla = (i[0],Columna5)
+        list_12.append(tupla)
+    list_12
+
+    for x in list_12:
+        for z in x[1]:
+            tupla12 = (x[0], z[4:])
+            list_12_2.append(tupla12) 
+
+    result = {}
+    for letra, valor in list_12_2:
+        valor = int(valor)
+    #     print(valor)
+        if letra in result.keys():
+            result[letra].append(valor)
+        else:
+            result[letra] = [valor]
+            
+    result = [(key, sum(valor)) for key, valor in result.items()]
+    result = sorted(result)
+    result = dict(result)
+    return result

@@ -444,7 +444,98 @@ def pregunta_11():
 
 
     """
-    return
+    df = open("data.csv", "r").readlines() #Se hace lectura de la data
+    df = [z.replace("\n", "") for z in df] #Retiramos el retorno de carro
+    df = [z.split("\t") for z in df] #Separamos
+
+    list_11 = []
+
+    Cols = [row[1:4:2] for row in df[0:]]
+    for i in Cols:
+        Columna4 = i[1].split(",")
+        for x in Columna4:
+            tupla = (i[0],x)
+            list_11.append(tupla) 
+
+    valA = []
+    letA = []
+    valB = []
+    letB = []
+    valC = []
+    letC = []
+    valD = []
+    letD = []
+    valE = []
+    letE = []
+    valF = []
+    letF = []
+    valG = []
+    letG = []
+
+    for j in list_11:
+        if j[1] == 'a':
+            valA.append(j[0])
+            letA.append(j[1])
+        elif j[1] == 'b':
+            valB.append(j[0])
+            letB.append(j[1])
+        elif j[1] == 'c':
+            valC.append(j[0])
+            letC.append(j[1])
+        elif j[1] == 'd':
+            valD.append(j[0])
+            letD.append(j[1])
+        elif j[1] == 'e':
+            valE.append(j[0])
+            letE.append(j[1])
+        elif j[1] == 'f':
+            valF.append(j[0])
+            letF.append(j[1])
+        else:
+            valG.append(j[0])
+            letG.append(j[1])
+
+    sumaA = 0
+    for i in valA:
+        sumaA = sumaA + int(i)
+
+    sumaB = 0
+    for i in valB:
+        sumaB = sumaB + int(i)
+
+    sumaC = 0
+    for i in valC:
+        sumaC = sumaC + int(i)
+
+    sumaD = 0
+    for i in valD:
+        sumaD = sumaD + int(i)
+
+    sumaE = 0
+    for i in valE:
+        sumaE = sumaE + int(i)
+
+    sumaF = 0
+    for i in valF:
+        sumaF = sumaF + int(i)
+
+    sumaG = 0
+    for i in valG:
+        sumaG = sumaG + int(i)
+
+    List_ordenada = [(letA[1], sumaA), (letB[1], sumaB), (letC[1], sumaC), (letD[1], sumaD), (letE[1], sumaE), (letF[1], sumaF), 
+                    (letG[1], sumaG)]
+
+    result = {}
+    for letra, suma in List_ordenada:
+        if letra in result.keys():
+            result[letra].append(suma)
+        else:
+            result[letra] = suma
+
+
+
+    return result
 
 
 def pregunta_12():
